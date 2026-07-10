@@ -238,9 +238,9 @@ db.usuarios.insertMany([
 
 /* ---- 2.4 Inserción de una valoración individual (insertOne) --------------- */
 db.valoraciones.insertOne({
-  usuarioId: db.usuario.findOne({email: "valep@correo.com"})._id,
+  usuarioId: db.usuarios.findOne({email: "valep@correo.com"})._id,
   usuarioNombre: "Valentina Parra",
-  contenidoId: db.contenido.findOne({titulo: "Samurai Jack"})._id,
+  contenidoId: db.contenidos.findOne({titulo: "Samurai Jack"})._id,
   contenidoTitulo: "Samurai Jack",
   puntuacion: 5,
   comentario: "La mejor caricatura de Tartakovsky",
@@ -324,7 +324,7 @@ db.listas.insertMany([
     fechaCreacion: new Date("2025-09-04")
   },
   {
-    usuarioId: db.usuario.findOne({email: "sebasr@correo.com"})._id,
+    usuarioId: db.usuarios.findOne({email: "sebasr@correo.com"})._id,
     nombreLista: "Favoritos",
     contenidos: [
       db.contenidos.findOne({titulo: "Chiquito pero peligroso"})._id,
@@ -463,7 +463,7 @@ db.contenidos.createIndex({ genero: 1 });
    Justificación: muchas consultas combinan tipo de contenido (película/serie)
    con rango de año (recientes vs. clásicos); un índice compuesto evita
    escanear toda la colección para esos filtros combinados. */
-db.contenidos.createIndex({ tipo: 1, anio: -1 });
+db.contenidos.createIndex({ tipo: 1, año: -1 });
 
 /* ---- 5.4 Índice único sobre "email" en usuarios ----------------------------
    Justificación: el email identifica de forma única a cada usuario y se usa
